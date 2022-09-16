@@ -10,6 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'docker build -t yassineelbahi/hub-alpine:latest .'
+        sh ' env | sort'
       }
     }
     stage('Login') {

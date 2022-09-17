@@ -16,7 +16,9 @@ pipeline {
     }
     stage('Login') {
       steps {
-        sh 'docker login'
+        sh 'echo DOCKERHUB_CREDENTIALS_PSW=$DOCKERHUB_CREDENTIALS_PSW' 
+        sh 'echo DOCKERHUB_CREDENTIALS_USR=$DOCKERHUB_CREDENTIALS_USR'
+
       }
     }
     stage('Push') {

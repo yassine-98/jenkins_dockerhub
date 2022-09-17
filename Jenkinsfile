@@ -12,25 +12,25 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './Build.sh'
+        sh './scripts/Build.sh'
 
       }
     }
     stage('Login') {
       steps {
-        sh './Login.sh'
+        sh './scripts/Login.sh'
 
       }
     }
     stage('Push') {
       steps {
-        sh './Push.sh'
+        sh './scripts/Push.sh'
       }
     }
   }
   post {
     always {
-      sh './Logout.out'
+      sh './scripts/Logout.out'
     }
   }
 }

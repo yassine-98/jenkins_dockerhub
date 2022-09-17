@@ -1,7 +1,7 @@
 pipeline {
 
   agent any
-
+  
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -12,25 +12,25 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './scripts/Build.sh'
-
+        sh 'docker build -t yassineelbahi/hub-alpine:latest .'
+        sh ' env | sort'
       }
     }
     stage('Login') {
       steps {
-        sh './scripts/Login.sh'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 
       }
     }
     stage('Push') {
       steps {
-        sh './scripts/Push.sh'
+        sh 'docker push yassineelbahi/hub-alpine:latest'
       }
     }
   }
   post {
     always {
-      sh './scripts/Logout.out'
+      sh 'docker logout'
     }
   }
 }

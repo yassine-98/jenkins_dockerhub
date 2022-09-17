@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u yassineelbahi --password-stdin'
+        sh 'docker login'
       }
     }
     stage('Push') {

@@ -5,7 +5,8 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('token-dockerhub')
+    DOCKERHUB_CREDENTIALS_PSW = credentials('token-dockerhub')
+    DOCKERHUB_CREDENTIALS_USR = 'yassineelbahi'
   }
   stages {
     stage('Build') {
@@ -16,8 +17,7 @@ pipeline {
     }
     stage('Login') {
       steps {
-        sh 'echo DOCKERHUB_CREDENTIALS_PSW=$DOCKERHUB_CREDENTIALS_PSW' 
-        sh 'echo DOCKERHUB_CREDENTIALS_USR=$DOCKERHUB_CREDENTIALS_USR'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 
       }
     }
